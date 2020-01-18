@@ -5,9 +5,13 @@ pragma solidity 0.5.16;
 
 contract CryptFunding {
     struct Campaign {
+        string title;
+        string long_description;
         address owner;
         uint256 deadline;
         uint256 goal;
+        uint256 raised;
+        mapping (address => uint256) contributions;
     }
 
     mapping (address => Campaign) campaigns;
