@@ -16,13 +16,15 @@ contract CryptFunding {
 
     mapping (address => Campaign) campaigns;
 
-    // map {address : amount of money pledged}
-    mapping(address => uint256) public pledges;
-
-    function Fund(uint256 numDays, uint256 goalAmount) public {
-        owner = msg.sender;
-        deadline = now + (numDays * 1 days);
-        goal = goalAmount;
+    function CreateFund(uint256 numHours, uint256 goalAmount, string newTitle, string newDescription) public {
+        campaigns[msg.sender] = Campaign({
+            title: newTitle,
+            long_description: newDescription,
+            owner: msg.sender,
+            deadline: now + (numHours * 1 hours),
+            goal: goalAmount,
+            raised: 0
+        });
     }
 
     function Pledge(uint256 amount) public payable {
