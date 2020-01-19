@@ -34,7 +34,31 @@ export default class NewCampaign extends Component {
     }
 
     handleSubmit(event) {
-        alert('A name was submitted: ' + this.state.formBasicEmail);
+
+
+        fetch(CONSTANTS.ENDPOINT.LIST, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                id: this.state.id
+            })
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw Error(response.statusText);
+                }
+                return response.json();
+            })
+            .then(result =>
+                this.setState(prevState => ({
+                    listItems: [result, ...prevState.listItems]
+                }))
+            )
+            .catch(error =>
+                alert('Campaign Post Request Error ' + error)
+            );
+
+
         event.preventDefault();
     }
 
