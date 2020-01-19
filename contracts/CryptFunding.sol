@@ -5,7 +5,7 @@ pragma solidity 0.5.16;
 // https://medium.com/openberry/creating-a-simple-crowdfunding-dapp-with-ethereum-solidity-and-vue-js-69ddb8e132dd
 
 contract CryptFunding {
-    mapping (address => Campaign) campaigns;
+    Campaign[] private campaigns;
 
     // map {address : amount of money pledged}
     mapping(address => uint256) public pledges;
@@ -20,9 +20,7 @@ contract CryptFunding {
             goalAmount
         );
 
-        address campaignAddress = address(newCampaign);
-
-        campaigns[campaignAddress] = newCampaign;
+        campaigns.push(newCampaign);
     }
 
     // function getCampagins() external view returns (Campaign[] memory) {
@@ -49,6 +47,7 @@ contract Campaign {
     }
 
     address payable public owner;
+    address id;
     string title;
     string description;
     uint256 deadline;
@@ -65,6 +64,7 @@ contract Campaign {
         uint256 _deadline,
         uint256 _goal
     ) public {
+        id = address(this);
         owner = _owner;
         title = _title;
         description = _description;
@@ -101,10 +101,21 @@ contract Campaign {
     }
 
     function returnFunds() public inState(State.Expired) returns (bool) {
-        
+        require(contributions[msg.sender] > 0);
+
+        uint256 refundAmount = contributions[msg.sender];
+        contributions[msg.sender] = 0;
+
+        if (msg.sender.send(refundAmount)) {
+            raised = raised - refundAmount;
+            return true;
+        }
+
+        return false;
     }
 
     function getDetails() public view returns(
+        address _id,
         address payable _owner,
         string memory _title,
         string memory _description,
@@ -113,6 +124,7 @@ contract Campaign {
         uint256 _raised,
         uint256 _goal
     ) {
+        _id = id;
         _owner = owner;
         _title = title;
         _description = description;
