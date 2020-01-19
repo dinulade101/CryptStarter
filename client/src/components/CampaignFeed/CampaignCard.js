@@ -18,21 +18,21 @@ export default class CampaignCard extends Component {
 
 
     componentDidMount() {
-        // fetch("http://127.0.0.1:5000/api/getpost?id=14")
-        //     .then(response => {
-        //         if (!response.ok) {
-        //             throw Error(response.statusText);
-        //         }
-        //         return response.json();
-        //     })
-        //     .then(resp => {
+        fetch("http://127.0.0.1:5000/api/getpost?id=14")
+            .then(response => {
+                if (!response.ok) {
+                    throw Error(response.statusText);
+                }
+                return response.json();
+            })
+            .then(resp => {
 
-        //         this.setState({ likes: resp[0].likes, picture: resp[1].pic_link });
+                this.setState({ likes: resp[0].likes, picture: resp[1].pic_link });
 
-        //     })
-        //     .catch(error =>
-        //         alert('Like and Image Request Error ' + error)
-        //     );
+            })
+            .catch(error =>
+                alert('Like and Image Request Error ' + error)
+            );
     }
 
 
@@ -54,7 +54,7 @@ export default class CampaignCard extends Component {
                             <Row>
                                 <Col sm={10}>
                                     <ProgressBar now={percentageRaised} />
-                                    💵 ${(this.props.campaign.data._raised/1000000000000000000)} out of ${this.props.campaign.data._goal}
+                                    💵 ${(this.props.campaign.data._raised/1000000000000000000)} out of ${this.props.campaign.data._goal }  👍{this.state.likes ? this.state.likes : 0}
                                 </Col>
                                 <Col sm={2}>
                                     <Button onClick={() => this.props.handleDonate(this.props.campaign)} variant="primary">Donate</Button>
