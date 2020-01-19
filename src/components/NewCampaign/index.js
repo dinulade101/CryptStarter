@@ -36,7 +36,7 @@ export default class NewCampaign extends Component {
     handleSubmit(event) {
 
 
-        fetch("http://34.66.213.104/api/createpost", {
+        fetch("http://35.229.119.94/api/createpost", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
