@@ -37,20 +37,17 @@ export default class NewCampaign extends Component {
     handleSubmit(event) {
         event.preventDefault();
 
+<<<<<<< HEAD
         //const { accounts, contract } = this.props;
         this.props.contract.methods.createCampaign(Math.round(this.state.date.getTime()/60000), this.state.goal, this.state.title, this.state.description).send({ from: this.props.accounts[0] });
+=======
+        this.props.contract.methods.createCampaign(Math.round(this.state.date.getTime() / 60000), this.state.goal, this.state.title, this.state.description).send({ from: this.props.accounts[0] });
+>>>>>>> 16df6f4534728f67089425e1f8ff1320a6eb205f
 
-//    function createCampaign(uint256 numHours, uint256 goalAmount, string calldata newTitle, string calldata newDescription) external {    
 
-
-        fetch("http://35.229.119.94/api/createpost", {
+        fetch("http://127.0.0.1:5000/api/createpost?id=14&pic_link=" + this.state.file[0], {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                id: this.state.id,
-                pic: this.state.picture,
-                file: this.state.file[0]
-            })
+            headers: { "Content-Type": "application/json" }
         })
             .then(response => {
                 if (!response.ok) {
@@ -58,11 +55,6 @@ export default class NewCampaign extends Component {
                 }
                 return response.json();
             })
-            .then(result =>
-                this.setState(prevState => ({
-                    listItems: [result, ...prevState.listItems]
-                }))
-            )
             .catch(error =>
                 alert('Campaign Post Request Error ' + error)
             );

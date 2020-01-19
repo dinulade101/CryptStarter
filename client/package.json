@@ -13,6 +13,7 @@
     "react-images-upload": "^1.2.7",
     "react-router-dom": "^5.1.2"
   },
+  "proxy": "http://127.0.0.1:5000",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

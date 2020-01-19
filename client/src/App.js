@@ -14,7 +14,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import "./App.css";
 
 class App extends Component {
-  state = { storageValue: 0, web3: null, accounts: null, contract: null };
+  state = { storageValue: 0, web3: null, accounts: null, contract: null, campaigns: null };
 
   componentDidMount = async () => {
     try {
@@ -32,8 +32,6 @@ class App extends Component {
         deployedNetwork && deployedNetwork.address,
       );
 
-      alert("got it");
-
       const campaigns = [];
 
       instance.methods.getCampagins().call().then((campagins) => {
@@ -49,6 +47,20 @@ class App extends Component {
       // Set web3, accounts, and contract to the state, and then proceed with an
       // example of interacting with the contract's methods.
       this.setState({ web3, accounts, contract: instance }, this.runExample);
+
+      fetch("http://35.229.119.94/api/listposts", {
+            method: "GET",
+            headers: { "Content-Type": "application/json" },
+        }).then((response) => {
+          if (!response.ok) {
+            throw Error(response.statusText);
+          }
+          return response.json();
+        }).then((response) => {
+          // self.state.campaigns = response;
+          this.setState({campaigns: response})
+        })
+
     } catch (error) {
       // Catch any errors for any of the above operations.
       alert(
@@ -74,6 +86,9 @@ class App extends Component {
   render() {
     if (!this.state.web3 && false) {
       return <div>Loading Web3, accounts, and contract...</div>;
+    }
+    if (!this.state.campaigns) {
+      return <div>Loading campaigns</div>;
     }
     return (
       <React.Fragment>
