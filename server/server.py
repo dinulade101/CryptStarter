@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, request
 import sqlite3
 from dbhelper import DBHelper
-
+import base64 import b64decode
 
 app = Flask(__name__)
 db = DBHelper()
@@ -15,16 +15,8 @@ def hello_world():
 @app.route('/api/createpost', methods=['POST', 'GET'])
 def createpost():
     if request.method == 'POST':
-        pic = request.args.get('pic')
-
-        # delete
-        print(pic)
-
         id = request.args.get('id')
-        pic_link = request.args.get('pic_link')
-        db.create_post(id, pic_link)
-
-
+        db.create_post(id, "as")
         return jsonify("success")
 
 
@@ -35,6 +27,14 @@ def incrementlikes():
         db.increment_likes(id)
         
         return jsonify("success")
+
+
+@app.route('/api/listposts', methods=['GET'])
+def getposts():
+    if request.method != 'GET':
+        return 'failed'
+
+    return jsonify(list(db.query_db('SELECT * FROM data;')))
 
 
 @app.route('/api/getpost', methods=['POST', 'GET'])
