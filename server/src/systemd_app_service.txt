@@ -7,7 +7,8 @@ User=amir
 Group=www-data
 WorkingDirectory=/home/amir/CryptStarter/server/server_env
 Environment="PATH=/usr/lib/python3/dist-packages/"
-ExecStart=/home/amir/CryptStarter/server/src/uwsgi --ini server.ini
+ExecStart=/usr/lib/python3/dist-packages/uwsgi --ini server.ini
 
 [Install]
 WantedBy=multi-user.target
+ 
