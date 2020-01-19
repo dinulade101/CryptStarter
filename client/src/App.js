@@ -44,7 +44,7 @@ class App extends Component {
         });
       });
 
-      this.setState({campaign_data: campaigns})
+      this.setState({campaign_data: campaigns, web3_new: web3})
 
 
       // Set web3, accounts, and contract to the state, and then proceed with an

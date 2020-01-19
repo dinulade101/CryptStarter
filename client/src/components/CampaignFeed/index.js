@@ -13,7 +13,6 @@ export default class CampaignFeed extends Component {
         
 
         super(props);
-        const web3 = getWeb3();
         /*
         getProjects() {
             crowdfundInstance.methods.returnAllProjects().call().then((projects) => {
@@ -49,8 +48,7 @@ export default class CampaignFeed extends Component {
             currentDonateID: "",
             currentContract: null,
             donationAmount: "",
-            campaigns: this.props.campaign_data,
-            web3_new: web3
+            campaigns: this.props.campaign_data
             // campaigns: [{
             //     title: "New Bridge in the South East",
             //     goal: 8000,
@@ -85,6 +83,7 @@ export default class CampaignFeed extends Component {
     }
 
     handleDonate(campaign) {
+        console.log(campaign);
         this.setState({ showModal: true, currentDonateTitle: campaign.title, currentDonateID: campaign.id, currentContract:campaign.contract })
 
     }
@@ -92,10 +91,10 @@ export default class CampaignFeed extends Component {
     handleConfirmDonate() {
         this.setState({ showModal: false })
         // thi.contract.methods.contribute().send({ from: this.props.accounts[0] });
-
-        var etherAmount = this.state.web3_new.toBigNumber(this.state.donationAmount).val();
-        var weiValue = this.state.web3_new.toWei(etherAmount,'ether');
-        this.state.currentContract.contribute({from: this.props.accounts[0], value: weiValue}, function(err, res){ })
+        console.log(parseInt(this.state.donationAmount));
+        var etherAmount = this.props.web3_new.utils.toBN(parseInt(this.state.donationAmount));
+        var weiValue = this.props.web3_new.utils.toWei(etherAmount,'ether');
+        this.state.currentContract.methods.contribute().send({from: this.props.accounts[0], value: weiValue});
     }
 
     handleCancel() {
