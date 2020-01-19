@@ -36,7 +36,7 @@ export default class NewCampaign extends Component {
     handleSubmit(event) {
 
 
-        fetch(CONSTANTS.ENDPOINT.LIST, {
+        fetch("", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
@@ -104,6 +104,7 @@ export default class NewCampaign extends Component {
                     <Form.Group>
                         <Form.Label>📸 Campaign Picture</Form.Label>
                         <ImageUploader
+                            withPreview={true}
                             withIcon={false}
                             buttonText='Choose Image'
                             onChange={this.onDrop}
