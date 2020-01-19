@@ -23,9 +23,9 @@ contract CryptFunding {
         campaigns.push(newCampaign);
     }
 
-    // function getCampagins() external view returns (Campaign[] memory) {
-    //     return campaigns;
-    // }
+    function getCampagins() external view returns (Campaign[] memory) {
+        return campaigns;
+    }
 
     // function DeleteCampaign(uint256 id) public {
     //     require(campaigns[id]);

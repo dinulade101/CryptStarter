@@ -26,6 +26,7 @@ def createpost():
 
 
 @app.route('/api/incrementlikes', methods=['POST', 'GET'])
+@cross_origin()
 def incrementlikes():
     if request.method == 'POST':
         id = request.args.get('id')
@@ -35,6 +36,7 @@ def incrementlikes():
 
 
 @app.route('/api/listposts', methods=['GET'])
+@cross_origin()
 def getposts():
     if request.method != 'GET':
         return 'failed'
@@ -43,6 +45,7 @@ def getposts():
 
 
 @app.route('/api/getpost', methods=['POST', 'GET'])
+@cross_origin()
 def getpost():
     if request.method == 'GET':
         id = request.args.get('id')
