@@ -12,19 +12,19 @@ class DBHelper:
         conn.close()
 
 
-    def get_db():
+    def get_db(self):
         return sqlite3.connect('database.db')
 
 
-    def query_db(query, args=(), one=False):
-        cur = get_db().execute(query, args)
+    def query_db(self, query, args=(), one=False):
+        cur = self.get_db().execute(query, args)
         rv = cur.fetchall()
         cur.close()
         return (rv[0] if rv else None) if one else rv
 
 
     def increment_likes(self, post_id):
-        post = query_db('select * from data where id = ?', [post_id], one=True)
+        post = self.query_db('select * from data where id = ?', [post_id], one=True)
 
         if post:
             with sqlite3.connect("database.db") as con:
@@ -45,7 +45,7 @@ class DBHelper:
 
 
     def get_likes(self, post_id):
-        post = query_db('select * from data where id = ?', (post_id), one=True)
+        post = self.query_db('select * from data where id = ?', (post_id), one=True)
 
         if post:
             return post[1]
@@ -70,10 +70,10 @@ class DBHelper:
 
 
     def get_post_likes_comments(self, post_id):
-        post = query_db('select * from data where id = ?', [post_id], one=True)
+        post = self.query_db('select * from data where id = ?', [post_id], one=True)
 
         if post:
-            print(post)
+            print(f"post: {post}")
             return (post[1], post[2])
         else:
             print("post not found")
