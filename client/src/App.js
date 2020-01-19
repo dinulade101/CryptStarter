@@ -38,7 +38,7 @@ class App extends Component {
         campagins.forEach((campaignAddress) => {
           const campaign = new web3.eth.Contract(Campaign.abi, campaignAddress);
           campaign.methods.getDetails().call().then((cData) => {
-            campaigns.push({contract:campaign, data: cData});
+            campaigns.push({ contract: campaign, data: cData });
             console.log(cData);
           });
         });
@@ -52,17 +52,17 @@ class App extends Component {
       this.setState({ web3, accounts, contract: instance }, this.runExample);
 
       fetch("http://35.229.119.94/api/listposts", {
-            method: "GET",
-            headers: { "Content-Type": "application/json" },
-        }).then((response) => {
-          if (!response.ok) {
-            throw Error(response.statusText);
-          }
-          return response.json();
-        }).then((response) => {
-          // self.state.campaigns = response;
-          this.setState({campaigns: response})
-        })
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      }).then((response) => {
+        if (!response.ok) {
+          throw Error(response.statusText);
+        }
+        return response.json();
+      }).then((response) => {
+        // self.state.campaigns = response;
+        this.setState({ campaigns: response })
+      })
 
     } catch (error) {
       // Catch any errors for any of the above operations.
@@ -97,9 +97,8 @@ class App extends Component {
       <React.Fragment>
         <TopBar />
         <Switch>
-          {/* <Route path="/" render={(routerProps) => (<CampaignFeed {...routerProps} {...this.state}/> )}  /> */}
           <Route exact path="/" render={(routerProps) => (<CampaignFeed {...routerProps} {...this.state} />)} />
-          <Route path="/NewCampaign" render={(routerProps) => (<NewCampaign {...routerProps} {...this.state}/> )}  />
+          <Route path="/NewCampaign" render={(routerProps) => (<NewCampaign {...routerProps} {...this.state} />)} />
         </Switch>
       </React.Fragment>
     );

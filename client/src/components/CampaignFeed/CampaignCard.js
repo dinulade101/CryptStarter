@@ -18,45 +18,43 @@ export default class CampaignCard extends Component {
 
 
     componentDidMount() {
-        fetch("http://127.0.0.1:5000/api/getpost?id=14")
-            .then(response => {
-                if (!response.ok) {
-                    throw Error(response.statusText);
-                }
-                return response.json();
-            })
-            .then(resp => {
+        // fetch("http://127.0.0.1:5000/api/getpost?id=14")
+        //     .then(response => {
+        //         if (!response.ok) {
+        //             throw Error(response.statusText);
+        //         }
+        //         return response.json();
+        //     })
+        //     .then(resp => {
 
-                this.setState({ likes: resp[0].likes, picture: resp[1].pic_link });
+        //         this.setState({ likes: resp[0].likes, picture: resp[1].pic_link });
 
-            })
-            .catch(error =>
-                alert('Like and Image Request Error ' + error)
-            );
+        //     })
+        //     .catch(error =>
+        //         alert('Like and Image Request Error ' + error)
+        //     );
     }
 
 
 
 
     render() {
-        const percentageRaised = Math.round((this.props.campaign.data._raised / this.props.campaign.data._goal) * 100);
+        const percentageRaised = Math.round(((this.props.campaign.data._raised/1000000000000000000) / this.props.campaign.data._goal) * 100);
         return (
             <Row>
 
                 <Col className={styles.campaignCard} sm={{ span: 8, offset: 2 }}>
                     <Card >
-                        <Card.Img variant="top" src={{ uri: this.state.picture }} />
+                        <Card.Img variant="top" src={"https://picsum.photos/id/1002/200/120"} />
                         <Card.Body>
                             <Card.Title>{this.props.campaign.data._title}</Card.Title>
                             <Card.Text>
                                 {this.props.campaign.data._description}
                             </Card.Text>
                             <Row>
-                                <Col sm={8}>
+                                <Col sm={10}>
                                     <ProgressBar now={percentageRaised} />
-                                </Col>
-                                <Col sm={2}>
-                                    Likes {this.state.likes}
+                                    💵 ${(this.props.campaign.data._raised/1000000000000000000)} out of ${this.props.campaign.data._goal}
                                 </Col>
                                 <Col sm={2}>
                                     <Button onClick={() => this.props.handleDonate(this.props.campaign)} variant="primary">Donate</Button>
