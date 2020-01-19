@@ -1,7 +1,6 @@
 from flask import Flask, jsonify, request
 import sqlite3
 from dbhelper import DBHelper
-import base64 import b64decode
 
 app = Flask(__name__)
 db = DBHelper()
