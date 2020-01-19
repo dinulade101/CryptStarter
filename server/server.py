@@ -3,7 +3,6 @@ from flask_cors import CORS, cross_origin
 import sqlite3
 from dbhelper import DBHelper
 
-
 app = Flask(__name__)
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
@@ -19,11 +18,6 @@ def hello_world():
 @cross_origin()
 def createpost():
     if request.method == 'POST':
-        pic = request.args.get('pic')
-
-        # delete
-        print(pic)
-
         id = request.args.get('id')
         pic_link = request.args.get('pic_link')
         db.create_post(id, pic_link)
@@ -38,6 +32,14 @@ def incrementlikes():
         db.increment_likes(id)
 
         return jsonify("success")
+
+
+@app.route('/api/listposts', methods=['GET'])
+def getposts():
+    if request.method != 'GET':
+        return 'failed'
+
+    return jsonify(list(db.query_db('SELECT * FROM data;')))
 
 
 @app.route('/api/getpost', methods=['POST', 'GET'])
