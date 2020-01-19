@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, send_from_directory
+from flask import Flask, jsonify, request
 import sqlite3
 from dbhelper import DBHelper
 
@@ -15,22 +15,29 @@ def hello_world():
 @app.route('/api/createpost', methods=['POST', 'GET'])
 def createpost():
     if request.method == 'POST':
-        id = request.form['id']
-        pic_link = request.form['pic_link']
+        id = request.args.get('id')
+        pic_link = request.args.get('pic_link')
         db.create_post(id, pic_link)
+
+        return jsonify("success")
 
 
 @app.route('/api/incrementlikes', methods=['POST', 'GET'])
 def incrementlikes():
     if request.method == 'POST':
-        id = request.form['id']
+        id = request.args.get('id')
         db.increment_likes(id)
+        
+        return jsonify("success")
 
 
 @app.route('/api/getpost', methods=['POST', 'GET'])
 def getpost():
     if request.method == 'GET':
-        post_details = db.get_post_likes_comments(request.form['id'])
+        id = request.args.get('id')
+        post_details = db.get_post_likes_comments(id)
+        print(post_details)
+        
         return jsonify([{'likes': post_details[0]}, {'pic_link': post_details[1]}])
 
 
