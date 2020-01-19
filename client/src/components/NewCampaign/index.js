@@ -38,7 +38,6 @@ export default class NewCampaign extends Component {
         event.preventDefault();
 
         //const { accounts, contract } = this.props;
-        console.log(this.props);
         this.props.contract.methods.createCampaign(Math.round(this.state.date.getTime()/60000), this.state.goal, this.state.title, this.state.description).send({ from: this.props.accounts[0] });
 
 //    function createCampaign(uint256 numHours, uint256 goalAmount, string calldata newTitle, string calldata newDescription) external {    

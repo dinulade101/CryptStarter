@@ -5,11 +5,42 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import InputGroup from "react-bootstrap/InputGroup";
 import FormControl from "react-bootstrap/FormControl";
+import Campaign from "../../contracts/CryptFunding.json";
+
 
 export default class CampaignFeed extends Component {
 
     constructor(props) {
         super(props);
+
+        /*
+        getProjects() {
+            crowdfundInstance.methods.returnAllProjects().call().then((projects) => {
+                projects.forEach((projectAddress) => {
+                const projectInst = crowdfundProject(projectAddress);
+                projectInst.methods.getDetails().call().then((projectData) => {
+                    const projectInfo = projectData;
+                    projectInfo.isLoading = false;
+                    projectInfo.contract = projectInst;
+                    this.projectData.push(projectInfo);
+                });
+                });
+            });
+        },
+        */
+        
+        const campaigns = [];
+
+        // this.props.contract.methods.getCampagins().call().then((campagins) => {
+        //     campagins.forEach((campaignAddress) => {
+        //         const campaign = Campaign(campaignAddress);
+        //         campaign.methods.getDetails().call().then((cData) => {
+        //             campaigns.push(cData);
+        //         })
+        //     })
+        //     console.log(campaigns);
+        // });
+
 
         this.state = {
             showModal: false,
