@@ -105,6 +105,7 @@ export default class NewCampaign extends Component {
                     <Form.Group>
                         <Form.Label>📸 Campaign Picture</Form.Label>
                         <ImageUploader
+                            withPreview={true}
                             withIcon={false}
                             buttonText='Choose Image'
                             onChange={this.onDrop}
