@@ -14,6 +14,7 @@ export default class NewCampaign extends Component {
         super(props);
         this.state = {
             picture: NaN,
+            file: NaN,
             title: "",
             description: "",
             goal: 0,
@@ -69,9 +70,10 @@ export default class NewCampaign extends Component {
         });
     }
 
-    onDrop(pic) {
+    onDrop(pic, f) {
         this.setState({
             picture: pic,
+            file: f
         });
     }
 
@@ -105,6 +107,7 @@ export default class NewCampaign extends Component {
                     <Form.Group>
                         <Form.Label>📸 Campaign Picture</Form.Label>
                         <ImageUploader
+                            singleImage={true}
                             withPreview={true}
                             withIcon={false}
                             buttonText='Choose Image'
