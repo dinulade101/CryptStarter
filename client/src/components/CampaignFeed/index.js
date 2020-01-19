@@ -11,30 +11,17 @@ export default class CampaignFeed extends Component {
     constructor(props) {
         super(props);
 
+        console.log("Amir output:");
+        console.log(props);
+
+        console.log(typeof(props));
+
         this.state = {
             showModal: false,
             currentDonateTitle: "",
             currentDonateID: "",
             donationAmount: "",
-            campaigns: [{
-                title: "New Bridge in the South East",
-                goal: 8000,
-                raised: 5800,
-                description: "Consectetur quis anim ullamco laboris in nulla ipsum adipisicing sit laborum laborum occaecat dolore. Nisi amet sint eu fugiat esse in voluptate officia labore eu. Occaecat elit consequat eu voluptate. Aute ea in proident nostrud occaecat. Enim excepteur commodo culpa nulla. Consectetur enim eiusmod elit sunt reprehenderit in ut. Duis id elit velit sunt nulla.",
-                id: 4
-            }, {
-                title: "Another project",
-                goal: 9000,
-                raised: 1700,
-                description: "Cillum tempor incididunt adipisicing ea sit sit officia nulla. Sunt proident ea proident nulla. Velit quis enim occaecat nostrud cillum sunt culpa sit mollit consectetur officia nostrud. In officia sunt reprehenderit sunt eiusmod sint non duis nisi magna amet consequat.",
-                id: 5
-            }, {
-                title: "Another one",
-                goal: 1200,
-                raised: 600,
-                description: "Nisi minim incididunt culpa labore pariatur pariatur non occaecat occaecat ex esse. In fugiat ex amet ut labore nostrud ex voluptate aute ipsum duis cupidatat elit sit. In incididunt minim culpa magna laborum minim sit. Quis fugiat consectetur non ea aliquip Lorem. Voluptate cupidatat quis mollit qui ut qui commodo. Culpa sint do aute occaecat ea.",
-                id: 6
-            }]
+            campaigns: Object.values(props)
         }
 
 
@@ -42,6 +29,10 @@ export default class CampaignFeed extends Component {
         this.handleConfirmDonate = this.handleConfirmDonate.bind(this);
         this.handleCancel = this.handleCancel.bind(this);
         this.handleDonationAmount = this.handleDonationAmount.bind(this);
+    }
+
+    setCampaigns(_campaigns) {
+        this.setState({ campaigns: _campaigns});
     }
 
     componentDidMount() {
@@ -66,9 +57,12 @@ export default class CampaignFeed extends Component {
     }
 
     render() {
+        console.log('_++________type:');
         const {
             campaigns, showModal, currentDonateTitle
         } = this.state;
+        console.log(campaigns)
+
         return (
             <Container>
                 {campaigns.map(campaign => (

@@ -35,9 +35,12 @@ class App extends Component {
       // example of interacting with the contract's methods.
       this.setState({ web3, accounts, contract: instance }, this.runExample);
 
+      const _id = 14;
+
       fetch("http://35.229.119.94/api/listposts", {
             method: "GET",
             headers: { "Content-Type": "application/json" },
+            body: { id: id, file: this.state.file[0]}
         }).then((response) => {
           if (!response.ok) {
             throw Error(response.statusText);
@@ -45,8 +48,10 @@ class App extends Component {
           return response.json();
         }).then((response) => {
           // self.state.campaigns = response;
-          this.setState({campaigns: response})
-        })
+          console.log('sdlfjhskjdfhsjd:');
+          console.log(response);
+          this.setState({campaigns: response});
+        });
 
     } catch (error) {
       // Catch any errors for any of the above operations.
@@ -77,11 +82,17 @@ class App extends Component {
     if (!this.state.campaigns) {
       return <div>Loading campaigns</div>;
     }
+
+    const props = {
+      campaigns: this.state.campaigns
+    }
+
     return (
       <React.Fragment>
         <TopBar />
         <Switch>
-          <Route exact path="/" component={CampaignFeed} />
+          <Route exact path="/" render={(props) => <CampaignFeed {...this.state.campaigns}/>}/>
+          {/* <Route exact path="/" component={CampaignFeed} /> */}
           <Route path="/NewCampaign" render={(routerProps) => (<NewCampaign {...routerProps} {...this.state} />)} />
         </Switch>
       </React.Fragment>

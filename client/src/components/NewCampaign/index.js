@@ -37,10 +37,10 @@ export default class NewCampaign extends Component {
     handleSubmit(event) {
         event.preventDefault();
 
-        this.props.contract.methods.createCampaign(Math.round(this.state.date.getTime() / 60000), this.state.goal, this.state.title, this.state.description).send({ from: this.props.accounts[0] });
+        // this.props.contract.methods.createCampaign(Math.round(this.state.date.getTime() / 60000), this.state.goal, this.state.title, this.state.description).send({ from: this.props.accounts[0] });
 
 
-        fetch("http://127.0.0.1:5000/api/createpost?id=14&pic_link=" + this.state.file[0], {
+        fetch("http://35.229.119.94/api/createpost?id=14&pic_link=" + this.state.file[0], {
             method: "POST",
             headers: { "Content-Type": "application/json" }
         })

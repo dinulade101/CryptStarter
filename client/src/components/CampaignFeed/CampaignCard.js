@@ -18,7 +18,7 @@ export default class CampaignCard extends Component {
 
 
     componentDidMount() {
-        fetch("http://127.0.0.1:5000/api/getpost?id=14")
+        fetch("http://35.229.119.94/api/getpost?id=14")
             .then(response => {
                 if (!response.ok) {
                     throw Error(response.statusText);
