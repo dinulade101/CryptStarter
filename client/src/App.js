@@ -64,7 +64,7 @@ class App extends Component {
       <React.Fragment>
         <TopBar />
         <Switch>
-          <Route exact path="/" component={CampaignFeed} />
+          <Route exact path="/" render={(routerProps) => (<CampaignFeed {...routerProps} {...this.state} />)} />
           <Route path="/NewCampaign" render={(routerProps) => (<NewCampaign {...routerProps} {...this.state} />)} />
         </Switch>
       </React.Fragment>

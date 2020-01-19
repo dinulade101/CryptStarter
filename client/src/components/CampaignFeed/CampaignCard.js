@@ -45,18 +45,16 @@ export default class CampaignCard extends Component {
 
                 <Col className={styles.campaignCard} sm={{ span: 8, offset: 2 }}>
                     <Card >
-                        <Card.Img variant="top" src={{ uri: this.state.picture }} />
+                        <Card.Img variant="top" src={"https://picsum.photos/id/1002/200/120"} />
                         <Card.Body>
                             <Card.Title>{this.props.campaign.title}</Card.Title>
                             <Card.Text>
                                 {this.props.campaign.description}
                             </Card.Text>
                             <Row>
-                                <Col sm={8}>
+                                <Col sm={10}>
                                     <ProgressBar now={percentageRaised} />
-                                </Col>
-                                <Col sm={2}>
-                                    Likes {this.state.likes}
+                                    💵 ${this.props.campaign.raised} out of ${this.props.campaign.goal}
                                 </Col>
                                 <Col sm={2}>
                                     <Button onClick={() => this.props.handleDonate(this.props.campaign)} variant="primary">Donate</Button>
