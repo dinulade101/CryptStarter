@@ -18,8 +18,10 @@ def hello_world():
 @cross_origin()
 def createpost():
     if request.method == 'POST':
-        id = request.args.get('id')
-        pic_link = request.args.get('pic_link')
+
+        data = request.get_json()
+        id = data['id']
+        pic_link = data['file']
         db.create_post(id, pic_link)
 
         return jsonify("success")

@@ -35,12 +35,9 @@ class App extends Component {
       // example of interacting with the contract's methods.
       this.setState({ web3, accounts, contract: instance }, this.runExample);
 
-      const _id = 14;
-
       fetch("http://35.229.119.94/api/listposts", {
             method: "GET",
             headers: { "Content-Type": "application/json" },
-            body: { id: id, file: this.state.file[0]}
         }).then((response) => {
           if (!response.ok) {
             throw Error(response.statusText);
