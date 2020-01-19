@@ -31,8 +31,6 @@ class App extends Component {
         deployedNetwork && deployedNetwork.address,
       );
 
-      alert("got it");
-
       // Set web3, accounts, and contract to the state, and then proceed with an
       // example of interacting with the contract's methods.
       this.setState({ web3, accounts, contract: instance }, this.runExample);
@@ -67,7 +65,7 @@ class App extends Component {
         <TopBar />
         <Switch>
           <Route exact path="/" component={CampaignFeed} />
-          <Route path="/NewCampaign" render={(routerProps) => (<NewCampaign {...routerProps} {...this.state}/> )}  />
+          <Route path="/NewCampaign" render={(routerProps) => (<NewCampaign {...routerProps} {...this.state} />)} />
         </Switch>
       </React.Fragment>
     );

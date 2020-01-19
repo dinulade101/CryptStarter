@@ -21,19 +21,19 @@ export default class CampaignFeed extends Component {
                 goal: 8000,
                 raised: 5800,
                 description: "Consectetur quis anim ullamco laboris in nulla ipsum adipisicing sit laborum laborum occaecat dolore. Nisi amet sint eu fugiat esse in voluptate officia labore eu. Occaecat elit consequat eu voluptate. Aute ea in proident nostrud occaecat. Enim excepteur commodo culpa nulla. Consectetur enim eiusmod elit sunt reprehenderit in ut. Duis id elit velit sunt nulla.",
-                id: 1
+                id: 4
             }, {
                 title: "Another project",
                 goal: 9000,
                 raised: 1700,
                 description: "Cillum tempor incididunt adipisicing ea sit sit officia nulla. Sunt proident ea proident nulla. Velit quis enim occaecat nostrud cillum sunt culpa sit mollit consectetur officia nostrud. In officia sunt reprehenderit sunt eiusmod sint non duis nisi magna amet consequat.",
-                id: 2
+                id: 5
             }, {
                 title: "Another one",
                 goal: 1200,
                 raised: 600,
                 description: "Nisi minim incididunt culpa labore pariatur pariatur non occaecat occaecat ex esse. In fugiat ex amet ut labore nostrud ex voluptate aute ipsum duis cupidatat elit sit. In incididunt minim culpa magna laborum minim sit. Quis fugiat consectetur non ea aliquip Lorem. Voluptate cupidatat quis mollit qui ut qui commodo. Culpa sint do aute occaecat ea.",
-                id: 3
+                id: 6
             }]
         }
 
@@ -45,21 +45,7 @@ export default class CampaignFeed extends Component {
     }
 
     componentDidMount() {
-        this.setState({
-            campaigns: [{
-                title: "New Bridge in the South East",
-                description: "Consectetur quis anim ullamco laboris in nulla ipsum adipisicing sit laborum laborum occaecat dolore. Nisi amet sint eu fugiat esse in voluptate officia labore eu. Occaecat elit consequat eu voluptate. Aute ea in proident nostrud occaecat. Enim excepteur commodo culpa nulla. Consectetur enim eiusmod elit sunt reprehenderit in ut. Duis id elit velit sunt nulla.",
-                id: 1
-            }, {
-                title: "Another project",
-                description: "Cillum tempor incididunt adipisicing ea sit sit officia nulla. Sunt proident ea proident nulla. Velit quis enim occaecat nostrud cillum sunt culpa sit mollit consectetur officia nostrud. In officia sunt reprehenderit sunt eiusmod sint non duis nisi magna amet consequat.",
-                id: 2
-            }, {
-                title: "Another one",
-                description: "Nisi minim incididunt culpa labore pariatur pariatur non occaecat occaecat ex esse. In fugiat ex amet ut labore nostrud ex voluptate aute ipsum duis cupidatat elit sit. In incididunt minim culpa magna laborum minim sit. Quis fugiat consectetur non ea aliquip Lorem. Voluptate cupidatat quis mollit qui ut qui commodo. Culpa sint do aute occaecat ea.",
-                id: 3
-            }]
-        })
+
     }
 
     handleDonate(campaign) {
