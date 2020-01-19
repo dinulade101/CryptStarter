@@ -3,11 +3,11 @@ Description=uWSGI instance to serve server
 After=network.target
 
 [Service]
-User=amir
+User=ahmed
 Group=www-data
-WorkingDirectory=/home/amir/CryptStarter/server/
+WorkingDirectory=/home/ahmed/CryptStarter/server/
 Environment="PATH=/usr/lib/python3/dist-packages/"
-ExecStart=/usr/local/bin/uwsgi --ini /home/amir/CryptStarter/server/server.ini
+ExecStart=/usr/local/bin/uwsgi --ini /home/ahmed/CryptStarter/server/server.ini
 
 [Install]
 WantedBy=multi-user.target
