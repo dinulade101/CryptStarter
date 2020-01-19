@@ -14,6 +14,7 @@ export default class NewCampaign extends Component {
         super(props);
         this.state = {
             picture: NaN,
+            file: NaN,
             title: "",
             description: "",
             goal: 0,
@@ -43,11 +44,13 @@ export default class NewCampaign extends Component {
 //    function createCampaign(uint256 numHours, uint256 goalAmount, string calldata newTitle, string calldata newDescription) external {    
 
 
-        fetch("", {
+        fetch("http://35.229.119.94/api/createpost", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-                id: this.state.id
+                id: this.state.id,
+                pic: this.state.picture,
+                file: this.state.file[0]
             })
         })
             .then(response => {
@@ -74,9 +77,10 @@ export default class NewCampaign extends Component {
         });
     }
 
-    onDrop(pic) {
+    onDrop(pic, f) {
         this.setState({
             picture: pic,
+            file: f
         });
     }
 
@@ -110,6 +114,7 @@ export default class NewCampaign extends Component {
                     <Form.Group>
                         <Form.Label>📸 Campaign Picture</Form.Label>
                         <ImageUploader
+                            singleImage={true}
                             withPreview={true}
                             withIcon={false}
                             buttonText='Choose Image'
