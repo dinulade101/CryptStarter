@@ -39,7 +39,7 @@ export default class CampaignCard extends Component {
 
 
     render() {
-        const percentageRaised = Math.round((this.props.campaign.raised / this.props.campaign.goal) * 100);
+        const percentageRaised = Math.round((this.props.campaign.data._raised / this.props.campaign.data._goal) * 100);
         return (
             <Row>
 
@@ -47,9 +47,9 @@ export default class CampaignCard extends Component {
                     <Card >
                         <Card.Img variant="top" src={{ uri: this.state.picture }} />
                         <Card.Body>
-                            <Card.Title>{this.props.campaign.title}</Card.Title>
+                            <Card.Title>{this.props.campaign.data._title}</Card.Title>
                             <Card.Text>
-                                {this.props.campaign.description}
+                                {this.props.campaign.data._description}
                             </Card.Text>
                             <Row>
                                 <Col sm={8}>

@@ -37,27 +37,23 @@ export default class NewCampaign extends Component {
     handleSubmit(event) {
         event.preventDefault();
 
-<<<<<<< HEAD
         //const { accounts, contract } = this.props;
-        this.props.contract.methods.createCampaign(Math.round(this.state.date.getTime()/60000), this.state.goal, this.state.title, this.state.description).send({ from: this.props.accounts[0] });
-=======
         this.props.contract.methods.createCampaign(Math.round(this.state.date.getTime() / 60000), this.state.goal, this.state.title, this.state.description).send({ from: this.props.accounts[0] });
->>>>>>> 16df6f4534728f67089425e1f8ff1320a6eb205f
 
 
-        fetch("http://127.0.0.1:5000/api/createpost?id=14&pic_link=" + this.state.file[0], {
-            method: "POST",
-            headers: { "Content-Type": "application/json" }
-        })
-            .then(response => {
-                if (!response.ok) {
-                    throw Error(response.statusText);
-                }
-                return response.json();
-            })
-            .catch(error =>
-                alert('Campaign Post Request Error ' + error)
-            );
+        // fetch("http://127.0.0.1:5000/api/createpost?id=14&pic_link=" + this.state.file[0], {
+        //     method: "POST",
+        //     headers: { "Content-Type": "application/json" }
+        // })
+        //     .then(response => {
+        //         if (!response.ok) {
+        //             throw Error(response.statusText);
+        //         }
+        //         return response.json();
+        //     })
+        //     .catch(error =>
+        //         alert('Campaign Post Request Error ' + error)
+        //     );
 
 
     }

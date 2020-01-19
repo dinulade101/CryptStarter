@@ -7,7 +7,7 @@ import TopBar from "./components/TopBar"
 import CampaignFeed from "./components/CampaignFeed";
 import NewCampaign from "./components/NewCampaign";
 import CryptFunding from "./contracts/CryptFunding.json";
-import Campaign from "./contracts/CryptFunding.json";
+import Campaign from "./contracts/Campaign.json";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -36,13 +36,16 @@ class App extends Component {
 
       instance.methods.getCampagins().call().then((campagins) => {
         campagins.forEach((campaignAddress) => {
-          const campaign = Campaign(campaignAddress);
+          const campaign = new web3.eth.Contract(Campaign.abi, campaignAddress);
           campaign.methods.getDetails().call().then((cData) => {
-            campaigns.push(cData);
+            campaigns.push({contract:campaign, data: cData});
+            console.log(cData);
           });
-        })
-        console.log(campaigns);
+        });
       });
+
+      this.setState({campaign_data: campaigns})
+
 
       // Set web3, accounts, and contract to the state, and then proceed with an
       // example of interacting with the contract's methods.
@@ -94,7 +97,8 @@ class App extends Component {
       <React.Fragment>
         <TopBar />
         <Switch>
-          <Route path="/" render={(routerProps) => (<CampaignFeed {...routerProps} {...this.state}/> )}  />
+          {/* <Route path="/" render={(routerProps) => (<CampaignFeed {...routerProps} {...this.state}/> )}  /> */}
+          <Route exact path="/" render={(routerProps) => (<CampaignFeed {...routerProps} {...this.state} />)} />
           <Route path="/NewCampaign" render={(routerProps) => (<NewCampaign {...routerProps} {...this.state}/> )}  />
         </Switch>
       </React.Fragment>

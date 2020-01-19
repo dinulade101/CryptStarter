@@ -5,14 +5,15 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import InputGroup from "react-bootstrap/InputGroup";
 import FormControl from "react-bootstrap/FormControl";
-import Campaign from "../../contracts/CryptFunding.json";
-
+import Campaign from "../../contracts/Campaign.json";
+import getWeb3 from "../../getWeb3";
 
 export default class CampaignFeed extends Component {
-
     constructor(props) {
-        super(props);
+        
 
+        super(props);
+        const web3 = getWeb3();
         /*
         getProjects() {
             crowdfundInstance.methods.returnAllProjects().call().then((projects) => {
@@ -46,26 +47,29 @@ export default class CampaignFeed extends Component {
             showModal: false,
             currentDonateTitle: "",
             currentDonateID: "",
+            currentContract: null,
             donationAmount: "",
-            campaigns: [{
-                title: "New Bridge in the South East",
-                goal: 8000,
-                raised: 5800,
-                description: "Consectetur quis anim ullamco laboris in nulla ipsum adipisicing sit laborum laborum occaecat dolore. Nisi amet sint eu fugiat esse in voluptate officia labore eu. Occaecat elit consequat eu voluptate. Aute ea in proident nostrud occaecat. Enim excepteur commodo culpa nulla. Consectetur enim eiusmod elit sunt reprehenderit in ut. Duis id elit velit sunt nulla.",
-                id: 4
-            }, {
-                title: "Another project",
-                goal: 9000,
-                raised: 1700,
-                description: "Cillum tempor incididunt adipisicing ea sit sit officia nulla. Sunt proident ea proident nulla. Velit quis enim occaecat nostrud cillum sunt culpa sit mollit consectetur officia nostrud. In officia sunt reprehenderit sunt eiusmod sint non duis nisi magna amet consequat.",
-                id: 5
-            }, {
-                title: "Another one",
-                goal: 1200,
-                raised: 600,
-                description: "Nisi minim incididunt culpa labore pariatur pariatur non occaecat occaecat ex esse. In fugiat ex amet ut labore nostrud ex voluptate aute ipsum duis cupidatat elit sit. In incididunt minim culpa magna laborum minim sit. Quis fugiat consectetur non ea aliquip Lorem. Voluptate cupidatat quis mollit qui ut qui commodo. Culpa sint do aute occaecat ea.",
-                id: 6
-            }]
+            campaigns: this.props.campaign_data,
+            web3_new: web3
+            // campaigns: [{
+            //     title: "New Bridge in the South East",
+            //     goal: 8000,
+            //     raised: 5800,
+            //     description: "Consectetur quis anim ullamco laboris in nulla ipsum adipisicing sit laborum laborum occaecat dolore. Nisi amet sint eu fugiat esse in voluptate officia labore eu. Occaecat elit consequat eu voluptate. Aute ea in proident nostrud occaecat. Enim excepteur commodo culpa nulla. Consectetur enim eiusmod elit sunt reprehenderit in ut. Duis id elit velit sunt nulla.",
+            //     id: 4
+            // }, {
+            //     title: "Another project",
+            //     goal: 9000,
+            //     raised: 1700,
+            //     description: "Cillum tempor incididunt adipisicing ea sit sit officia nulla. Sunt proident ea proident nulla. Velit quis enim occaecat nostrud cillum sunt culpa sit mollit consectetur officia nostrud. In officia sunt reprehenderit sunt eiusmod sint non duis nisi magna amet consequat.",
+            //     id: 5
+            // }, {
+            //     title: "Another one",
+            //     goal: 1200,
+            //     raised: 600,
+            //     description: "Nisi minim incididunt culpa labore pariatur pariatur non occaecat occaecat ex esse. In fugiat ex amet ut labore nostrud ex voluptate aute ipsum duis cupidatat elit sit. In incididunt minim culpa magna laborum minim sit. Quis fugiat consectetur non ea aliquip Lorem. Voluptate cupidatat quis mollit qui ut qui commodo. Culpa sint do aute occaecat ea.",
+            //     id: 6
+            // }]
         }
 
 
@@ -73,6 +77,7 @@ export default class CampaignFeed extends Component {
         this.handleConfirmDonate = this.handleConfirmDonate.bind(this);
         this.handleCancel = this.handleCancel.bind(this);
         this.handleDonationAmount = this.handleDonationAmount.bind(this);
+
     }
 
     componentDidMount() {
@@ -80,12 +85,17 @@ export default class CampaignFeed extends Component {
     }
 
     handleDonate(campaign) {
-        this.setState({ showModal: true, currentDonateTitle: campaign.title, currentDonateID: campaign.id })
+        this.setState({ showModal: true, currentDonateTitle: campaign.title, currentDonateID: campaign.id, currentContract:campaign.contract })
 
     }
 
     handleConfirmDonate() {
         this.setState({ showModal: false })
+        // thi.contract.methods.contribute().send({ from: this.props.accounts[0] });
+
+        var etherAmount = this.state.web3_new.toBigNumber(this.state.donationAmount).val();
+        var weiValue = this.state.web3_new.toWei(etherAmount,'ether');
+        this.state.currentContract.contribute({from: this.props.accounts[0], value: weiValue}, function(err, res){ })
     }
 
     handleCancel() {
@@ -104,7 +114,7 @@ export default class CampaignFeed extends Component {
             <Container>
                 {campaigns.map(campaign => (
                     <CampaignCard
-                        key={campaign.id}
+                        key={campaign._id}
                         campaign={campaign}
                         handleDonate={this.handleDonate}
                     />
