@@ -1,5 +1,5 @@
 [Unit]
-Description=uWSGI instance to serve myproject
+Description=uWSGI instance to serve server
 After=network.target
 
 [Service]
